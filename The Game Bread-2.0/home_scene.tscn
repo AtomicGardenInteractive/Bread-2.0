@@ -1,21 +1,110 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4ib2c4nsxcuh"]
+[gd_scene load_steps=11 format=3 uid="uid://b4ib2c4nsxcuh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jadq"]
+[ext_resource type="PackedScene" uid="uid://cg1tnw8w6avaj" path="res://Stage.tscn" id="1_bmiyg"]
+[ext_resource type="Texture2D" uid="uid://rs5j3lxtdwht" path="res://Walking1.webp" id="2_dhxag"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_r0nvp"]
-material = SubResource("StandardMaterial3D_1jadq")
-size = Vector2(20, 20)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bugxw"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_3g5bf"]
+sky_material = SubResource("ProceduralSkyMaterial_bugxw")
+
+[sub_resource type="Environment" id="Environment_d6253"]
+background_mode = 2
+sky = SubResource("Sky_3g5bf")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0ctl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wmfmy"]
+material = SubResource("StandardMaterial3D_d0ctl")
+
+[sub_resource type="Animation" id="Animation_5rxf8"]
+resource_name = "Catching Seasons Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_5t2t2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_evb3f"]
+_data = {
+"Catching Seasons Walk": SubResource("Animation_5rxf8"),
+"RESET": SubResource("Animation_5t2t2")
+}
 
 [node name="Home Scene" type="Node3D"]
 
-[node name="Background" type="Node3D" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d6253")
 
-[node name="ScreenWall" type="MeshInstance3D" parent="Background"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, -10)
-mesh = SubResource("QuadMesh_r0nvp")
-skeleton = NodePath("../..")
+[node name="Stage" parent="." instance=ExtResource("1_bmiyg")]
 
-[node name="ScreenFloor" type="MeshInstance3D" parent="Background"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, -10)
-mesh = SubResource("QuadMesh_r0nvp")
-skeleton = NodePath("../..")
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 0.859754, 0.510708, 0, -0.510708, 0.859754, 0, 6.62106, 3.39641)
+light_color = Color(1, 1, 0.85098, 1)
+shadow_enabled = true
+spot_range = 10.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(0.954704, 0, -0.297558, 0.151965, 0.859754, 0.487575, 0.255827, -0.510708, 0.820811, -6.46609, 4.60354, 0)
+light_color = Color(1, 1, 0.85098, 1)
+shadow_enabled = true
+spot_range = 20.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(0.960755, 7.45058e-09, 0.277399, -0.14167, 0.859754, 0.490665, -0.238495, -0.510708, 0.826013, 5.08481, 4.60354, 0)
+light_color = Color(1, 1, 0.85098, 1)
+shadow_enabled = true
+spot_range = 20.0
+
+[node name="Sculture" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sculture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+mesh = SubResource("CylinderMesh_wmfmy")
+
+[node name="Sprite3D" type="Sprite3D" parent="Sculture"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.5, -5)
+billboard = 1
+texture_filter = 2
+texture = ExtResource("2_dhxag")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sculture/Sprite3D"]
+libraries = {
+"": SubResource("AnimationLibrary_evb3f")
+}
+autoplay = "Catching Seasons Walk"
+speed_scale = 0.75

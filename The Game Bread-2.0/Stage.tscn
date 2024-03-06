@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg1tnw8w6avaj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jadq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_r0nvp"]
+material = SubResource("StandardMaterial3D_1jadq")
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03gnd"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_nvgky"]
+material = SubResource("StandardMaterial3D_03gnd")
+size = Vector2(20, 20)
+
+[node name="Stage" type="Node3D"]
+
+[node name="ScreenWallRear" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, -10)
+mesh = SubResource("QuadMesh_r0nvp")
+skeleton = NodePath("../..")
+
+[node name="ScreenFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_r0nvp")
+skeleton = NodePath("../..")
+
+[node name="ScreemWallSideL" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, -5)
+mesh = SubResource("QuadMesh_nvgky")
+
+[node name="ScreemWallSideR" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, -5)
+mesh = SubResource("QuadMesh_nvgky")
