@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4ib2c4nsxcuh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jadq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_r0nvp"]
+material = SubResource("StandardMaterial3D_1jadq")
+size = Vector2(20, 20)
+
+[node name="Home Scene" type="Node3D"]
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="ScreenWall" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, -10)
+mesh = SubResource("QuadMesh_r0nvp")
+skeleton = NodePath("../..")
+
+[node name="ScreenFloor" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, -10)
+mesh = SubResource("QuadMesh_r0nvp")
+skeleton = NodePath("../..")
