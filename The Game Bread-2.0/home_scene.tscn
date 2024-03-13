@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4ib2c4nsxcuh"]
+[gd_scene load_steps=12 format=3 uid="uid://b4ib2c4nsxcuh"]
 
 [ext_resource type="PackedScene" uid="uid://cg1tnw8w6avaj" path="res://Stage.tscn" id="1_bmiyg"]
-[ext_resource type="Texture2D" uid="uid://dj3qmiegua5yo" path="res://Kyle/Walking1.webp" id="2_dhxag"]
+[ext_resource type="Texture2D" uid="uid://rs5j3lxtdwht" path="res://Kyle/Walking1.webp" id="2_dhxag"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bugxw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,6 +15,9 @@ background_mode = 2
 sky = SubResource("Sky_3g5bf")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m722h"]
+bg_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0ctl"]
 albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
@@ -89,19 +92,29 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = -40.0
+offset_top = -98.0
 offset_right = 20.0
+offset_bottom = -58.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="Camera3D/UI/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+text = "<"
+
+[node name="Panel" type="Panel" parent="Camera3D/UI/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m722h")
 
 [node name="Button2" type="Button" parent="Camera3D/UI/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+text = ">"
 
 [node name="Lighting" type="Node3D" parent="."]
 
