@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4ib2c4nsxcuh"]
 
 [ext_resource type="PackedScene" uid="uid://cg1tnw8w6avaj" path="res://Stage.tscn" id="1_bmiyg"]
-[ext_resource type="Texture2D" uid="uid://rs5j3lxtdwht" path="res://Walking1.webp" id="2_dhxag"]
+[ext_resource type="Texture2D" uid="uid://dj3qmiegua5yo" path="res://Kyle/Walking1.webp" id="2_dhxag"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bugxw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,6 +17,8 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0ctl"]
+albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
+roughness = 0.55
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wmfmy"]
 material = SubResource("StandardMaterial3D_d0ctl")
@@ -67,7 +69,39 @@ environment = SubResource("Environment_d6253")
 [node name="Stage" parent="." instance=ExtResource("1_bmiyg")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.5)
+
+[node name="UI" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera3D/UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Camera3D/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="Camera3D/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Lighting" type="Node3D" parent="."]
 
@@ -90,6 +124,7 @@ shadow_enabled = true
 spot_range = 20.0
 
 [node name="Sculture" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.81182)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sculture"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
