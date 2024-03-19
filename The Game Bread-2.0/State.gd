@@ -3,6 +3,7 @@ class_name State
 
 var state_machine: StateMachine
 var available: bool = true
+signal ChangeState
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
